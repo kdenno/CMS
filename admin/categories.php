@@ -58,16 +58,14 @@ include "includes/head.php";
                               </tr>
                             </thead>
                             <tbody>
-                              <?php
-                              $query = "SELECT * FROM categories";
-                              $categories = mysqli_query($connection, $query);
-                              ?>
-                              
                                 <?php 
+                                $query = "SELECT * FROM categories";
+                                $categories = mysqli_query($connection, $query);
                                 while($row = mysqli_fetch_assoc($categories)) { ?>
                                 <tr>
                                 <td><?php echo $row['cat_id']; ?></td>
                                 <td><?php echo $row['cat_title']; ?></td>
+                                <td><a href="categories.php?delete=<?php echo $row['cat_id']; ?>">Delete</a></td>
                                 </tr>
 
                                 <?php 
@@ -82,6 +80,18 @@ include "includes/head.php";
                           </table>
 
                         </div>
+                        <?php 
+                        // delete a category
+                        if(isset($_GET['delete'])){
+                          $cat_id = $_GET['delete'];
+                        $query ="DELETE FROM categories WHERE cat_id = {$cat_id} ";
+                        $delete_query = mysqli_query($connection, $query);
+                        // refresh page
+                        header("Location: categories.php");
+
+                        }
+                        
+                        ?>
 
 
                     </div>
