@@ -120,15 +120,15 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#post_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="post_dropdown" class="collapse">
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="./posts.php">View All Posts</a>
                             </li>
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="#">Add Posts</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Categories</a>
+                        <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Categories</a>
                     </li>
                     
                     <li class="active">
