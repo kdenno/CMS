@@ -22,9 +22,16 @@
             <td><?php echo $row['post_id']; ?></td>
             <td><?php echo $row['post_author']; ?></td>
             <td><?php echo $row['post_title']; ?></td>
-            <td><?php echo $row['post_category_id']; ?></td>
+          <td><?php $cat_query = "SELECT * FROM categories WHERE cat_id = {$row['post_category_id']}";
+          $cats = mysqli_query($connection, $cat_query);
+          while ($catrow = mysqli_fetch_assoc($cats)) {
+            $cat_id = $catrow['cat_id'];
+            $cat_title = $catrow['cat_title'];
+
+          }
+          echo $cat_title; ?></td>
             <td><?php echo $row['post_status']; ?></td>
-            <td><?php echo $row['post_image']; ?></td>
+            <td><img src ="../images/<?php echo $row['post_image']; ?>" width="50px;"></td>
             <td><?php echo $row['post_tags']; ?></td>
             <td><?php echo $row['post_comment_count']; ?></td>
             <td><?php echo $row['post_date']; ?></td>
