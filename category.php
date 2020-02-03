@@ -20,9 +20,13 @@ include "includes/header.php";
 
             <!-- Blog Posts -->
             <?php
-            $query = "SELECT * FROM posts";
-            $all_posts = mysqli_query($connection, $query);
-            while ($row = mysqli_fetch_assoc($all_posts)) { ?>
+            if(isset($_GET['cat_id'])) {
+              $cat_id = $_GET['cat_id'];
+
+            }
+            $query = "SELECT * FROM posts WHERE post_category_id = $cat_id";
+            $the_posts = mysqli_query($connection, $query);
+            while ($row = mysqli_fetch_assoc($the_posts)) { ?>
 
                 <h2>
                     <a href="post.php?p_id=<?php echo $row['post_id']?>"><?php echo $row['post_title']; ?></a>

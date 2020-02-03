@@ -24,29 +24,20 @@
     <div class="row">
       <div class="col-lg-6">
         <ul class="list-unstyled">
-          <li><a href="#">Category Name</a>
-          </li>
-          <li><a href="#">Category Name</a>
-          </li>
-          <li><a href="#">Category Name</a>
-          </li>
-          <li><a href="#">Category Name</a>
-          </li>
+          <?php
+          $query = "SELECT * FROM categories";
+          $all_categories = mysqli_query($connection, $query);
+          while($row = mysqli_fetch_assoc($all_categories)) { ?>
+            <li><a href="category.php?cat_id=<?php echo $row['cat_id'];?>"><?php echo $row['cat_title']; ?></a>
+
+          <?php
+          }
+          ?>
+         
         </ul>
       </div>
       <!-- /.col-lg-6 -->
-      <div class="col-lg-6">
-        <ul class="list-unstyled">
-          <li><a href="#">Category Name</a>
-          </li>
-          <li><a href="#">Category Name</a>
-          </li>
-          <li><a href="#">Category Name</a>
-          </li>
-          <li><a href="#">Category Name</a>
-          </li>
-        </ul>
-      </div>
+      
       <!-- /.col-lg-6 -->
     </div>
     <!-- /.row -->
