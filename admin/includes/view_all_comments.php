@@ -35,7 +35,16 @@
         
             <td><?php echo $row['comment_email']; ?></td>
             <td><?php echo $row['comment_status']; ?></td>
-            <td></td>
+            <?php 
+            $commentpostid = $row['comment_post_id'];
+            $responseTo = "SELECT * FROM posts WHERE post_id = $commentpostid  " ;
+            $commentpost = mysqli_query($connection, $responseTo);
+            while ($row = mysqli_fetch_assoc($commentpost)) { 
+              $posttito = $row['post_title'];
+              $postid = $row['post_id'];
+              echo "<td><a href='../post.php?p_id=$postid'>$posttito</a></td>";
+
+            }?>
             <td><?php echo $row['comment_date']; ?></td>
             <td><a href="posts.php?source=edit_post&p_id=<?php echo $row['comment_id']; ?>">Approve</a></td>
             <td><a href="posts.php?delete=<?php echo $row['comment_id']; ?>">UnApprove</a></td>
