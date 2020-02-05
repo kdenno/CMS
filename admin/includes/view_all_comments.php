@@ -20,7 +20,8 @@
           $query = "SELECT * FROM comment";
           $comments = mysqli_query($connection, $query);
           while ($row = mysqli_fetch_assoc($comments)) {
-            $commentid = $row['comment_id']; ?>
+            $commentid = $row['comment_id'];
+            $commentdate = $row['comment_date']; ?>
           <tr>
             <td><?php echo $commentid; ?></td>
             <td><?php echo $row['comment_author']; ?></td>
@@ -46,9 +47,9 @@
               echo "<td><a href='../post.php?p_id=$postid'>$posttito</a></td>";
 
             }?>
-            <td><?php echo $row['comment_date']; ?></td>
-            <td><a href="posts.php?source=edit_post&p_id=<?php echo $row['comment_id']; ?>">Approve</a></td>
-            <td><a href="comments.php?delete=<?php echo $commentid; ?>">UnApprove</a></td>
+            <td><?php echo $commentdate; ?></td>
+            <td><a href="comments.php?approve=<?php echo $commentid; ?>">Approve</a></td>
+            <td><a href="comments.php?unapprove=<?php echo $commentid; ?>">UnApprove</a></td>
             <td><a href="comments.php?delete=<?php echo $commentid; ?>">Delete</a></td>
           </tr>
 
@@ -65,6 +66,22 @@
         $query = "DELETE FROM comment WHERE comment_id = {$the_comment_id}";
         $delete_query = mysqli_query($connection, $query);
         confirm_query($delete_query);
+        header("Location: comments.php");
+        }
+
+        if(isset($_GET['approve'])) {
+          $the_comment_id = $_GET['approve'];
+        $query = "UPDATE comment SET comment_status = 'approve' WHERE comment_id = {$the_comment_id}";
+        $update_query = mysqli_query($connection, $query);
+        confirm_query($update_query);
+        header("Location: comments.php");
+        }
+
+        if(isset($_GET['unapprove'])) {
+          $the_comment_id = $_GET['unapprove'];
+        $query = "UPDATE comment SET comment_status = 'unapprove' WHERE comment_id = {$the_comment_id}";
+        $update_query = mysqli_query($connection, $query);
+        confirm_query($update_query);
         header("Location: comments.php");
         }
         
