@@ -19,9 +19,10 @@
           <?php 
           $query = "SELECT * FROM comment";
           $comments = mysqli_query($connection, $query);
-          while ($row = mysqli_fetch_assoc($comments)) { ?>
+          while ($row = mysqli_fetch_assoc($comments)) {
+            $commentid = $row['comment_id']; ?>
           <tr>
-            <td><?php echo $row['comment_id']; ?></td>
+            <td><?php echo $commentid; ?></td>
             <td><?php echo $row['comment_author']; ?></td>
             <td><?php echo $row['comment_content']; ?></td>
           <!-- <td><?php $cat_query = "SELECT * FROM categories WHERE cat_id = {$row['post_category_id']}";
@@ -47,8 +48,8 @@
             }?>
             <td><?php echo $row['comment_date']; ?></td>
             <td><a href="posts.php?source=edit_post&p_id=<?php echo $row['comment_id']; ?>">Approve</a></td>
-            <td><a href="posts.php?delete=<?php echo $row['comment_id']; ?>">UnApprove</a></td>
-            <td><a href="posts.php?delete=<?php echo $row['comment_id']; ?>">Delete</a></td>
+            <td><a href="comments.php?delete=<?php echo $commentid; ?>">UnApprove</a></td>
+            <td><a href="comments.php?delete=<?php echo $commentid; ?>">Delete</a></td>
           </tr>
 
           <?php
@@ -60,10 +61,11 @@
         </table>
         <?php
         if(isset($_GET['delete'])) {
-          $the_post_id = $_GET['delete'];
-        $query = "DELETE FROM posts WHERE post_id = {$the_post_id}";
+          $the_comment_id = $_GET['delete'];
+        $query = "DELETE FROM comment WHERE comment_id = {$the_comment_id}";
         $delete_query = mysqli_query($connection, $query);
         confirm_query($delete_query);
+        header("Location: comments.php");
         }
         
         ?>
